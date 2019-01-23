@@ -1,12 +1,15 @@
 import numpy as np
 
+
 def sigmoid(value):
     """Вычисление сигмоидной функции активации"""
     return 1 / (1 + np.exp(-value))
 
+
 def softmax(value):
     """Вычисление функции softmax"""
     return np.exp(value)/np.sum(np.exp(value))    
+
 
 def learning(array_vector, nw):
     """Обучение"""
@@ -25,8 +28,9 @@ def learning(array_vector, nw):
         nw.change_T_input()
         epoch += 1
 
+
 def prediction(array_vector, nw):
-    input_vector = np.array([[1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1]])
+    input_vector = np.array([[1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1]])
     nw.value_hidden = sigmoid(np.dot(input_vector, nw.w_input.T) - nw.T_input)
     nw.value_output = softmax(np.dot(nw.value_hidden, nw.w_hidden.T) - nw.T_hidden)
     value = nw.value_output.argmax()
